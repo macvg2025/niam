@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Niam CO - Premium Phone Marketplace</title>
+    <link rel="icon" type="image/png" href="symbol.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -14,6 +15,7 @@
             --light: #f8fafc;
             --gray: #64748b;
             --success: #10b981;
+            --error: #ef4444;
         }
         
         * {
@@ -21,6 +23,10 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -61,14 +67,19 @@
         }
         
         .logo-icon {
-            background-color: var(--primary);
-            color: white;
             width: 40px;
             height: 40px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+        }
+        
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         
         nav ul {
@@ -209,6 +220,12 @@
             color: var(--gray);
         }
         
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .carousel-controls {
             position: absolute;
             bottom: 20px;
@@ -282,6 +299,12 @@
             font-weight: 500;
         }
         
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .product-info {
             padding: 1.5rem;
         }
@@ -302,6 +325,12 @@
             font-weight: 700;
             font-size: 1.3rem;
             color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .buddy-money {
+            font-size: 0.9rem;
+            color: var(--secondary);
             margin-bottom: 1rem;
         }
         
@@ -368,6 +397,13 @@
             justify-content: center;
             color: var(--gray);
             font-weight: 500;
+            overflow: hidden;
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .member-name {
@@ -443,6 +479,13 @@
             align-items: center;
             justify-content: center;
             color: var(--gray);
+            overflow: hidden;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .cart-item-details {
@@ -500,7 +543,7 @@
         }
         
         .form-group textarea {
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
         }
         
@@ -511,6 +554,89 @@
             margin: 1.5rem 0;
             font-size: 0.9rem;
             color: #92400e;
+        }
+        
+        /* Success Notification */
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            z-index: 1200;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        
+        .notification-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .notification-icon {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .notification h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .notification p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        
+        .contact-info {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .close-notification {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .close-notification:hover {
+            background-color: var(--primary-dark);
         }
         
         /* Footer */
@@ -627,10 +753,7 @@
                 width: 100%;
                 right: -100%;
             }
-            /* Add smooth scrolling to the entire page */
-html {
-  scroll-behavior: smooth;
-}
+            
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
@@ -643,7 +766,9 @@ html {
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">N</div>
+                    <div class="logo-icon">
+                        <img src="symbol.png" alt="Niam CO Logo">
+                    </div>
                     <span>Niam CO</span>
                 </div>
                 <nav>
@@ -677,11 +802,21 @@ html {
     <div class="container">
         <div class="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item">iPork - Premium Innovation</div>
-                <div class="carousel-item">iBrick - Unmatched Durability</div>
-                <div class="carousel-item">Niam Phone - The Ultimate Experience</div>
-                <div class="carousel-item">Niam Flip V1 - Classic Design</div>
-                <div class="carousel-item">Niam Flip V2 - Next Generation</div>
+                <div class="carousel-item">
+                    <img src="placeholder.png" alt="iPork">
+                </div>
+                <div class="carousel-item">
+                    <img src="placeholder.png" alt="iBrick">
+                </div>
+                <div class="carousel-item">
+                    <img src="placeholder.png" alt="Niam Phone">
+                </div>
+                <div class="carousel-item">
+                    <img src="placeholder.png" alt="Niam Flip V1">
+                </div>
+                <div class="carousel-item">
+                    <img src="placeholder.png" alt="Niam Flip V2">
+                </div>
             </div>
             <div class="carousel-controls">
                 <div class="carousel-indicator active" data-index="0"></div>
@@ -700,56 +835,85 @@ html {
             <div class="products-grid">
                 <!-- Product 1 -->
                 <div class="product-card fade-in">
-                    <div class="product-image">iPork Image</div>
+                    <div class="product-image">
+                        <img src="placeholder.png" alt="iPork">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">iPork</h3>
                         <p class="product-description">The revolutionary phone with organic design and premium features. Experience seamless performance with our signature aesthetic.</p>
                         <div class="product-price">$3</div>
-                        <button class="add-to-cart" data-product="iPork" data-price="899">Add to Cart</button>
+                        <div class="buddy-money">15 Buddy Money</div>
+                        <button class="add-to-cart" data-product="iPork" data-price="3">Add to Cart</button>
                     </div>
                 </div>
                 
                 <!-- Product 2 -->
                 <div class="product-card fade-in">
-                    <div class="product-image">iBrick Image</div>
+                    <div class="product-image">
+                        <img src="placeholder.png" alt="iBrick">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">iBrick</h3>
                         <p class="product-description">Unmatched durability meets sophisticated design. The iBrick is built to last with premium materials and exceptional performance.</p>
                         <div class="product-price">$4</div>
-                        <button class="add-to-cart" data-product="iBrick" data-price="749">Add to Cart</button>
+                        <div class="buddy-money">20 Buddy Money</div>
+                        <button class="add-to-cart" data-product="iBrick" data-price="4">Add to Cart</button>
                     </div>
                 </div>
                 
                 <!-- Product 3 -->
                 <div class="product-card fade-in">
-                    <div class="product-image">Niam Phone Image</div>
+                    <div class="product-image">
+                        <img src="placeholder.png" alt="Niam Phone">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Niam Phone</h3>
                         <p class="product-description">Our flagship device with cutting-edge technology and elegant design. Experience the future of mobile communication.</p>
-                        <div class="product-price">$2</div>
-                        <button class="add-to-cart" data-product="Niam Phone" data-price="999">Add to Cart</button>
+                        <div class="product-price">$3</div>
+                        <div class="buddy-money">15 Buddy Money</div>
+                        <button class="add-to-cart" data-product="Niam Phone" data-price="3">Add to Cart</button>
                     </div>
                 </div>
                 
                 <!-- Product 4 -->
                 <div class="product-card fade-in">
-                    <div class="product-image">Niam Flip V1 Image</div>
+                    <div class="product-image">
+                        <img src="placeholder.png" alt="Niam Flip V1">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Niam Flip V1</h3>
                         <p class="product-description">The classic flip phone reimagined with modern features. Compact design with powerful performance for everyday use.</p>
-                        <div class="product-price">$1</div>
-                        <button class="add-to-cart" data-product="Niam Flip V1" data-price="599">Add to Cart</button>
+                        <div class="product-price">$2</div>
+                        <div class="buddy-money">10 Buddy Money</div>
+                        <button class="add-to-cart" data-product="Niam Flip V1" data-price="2">Add to Cart</button>
                     </div>
                 </div>
                 
                 <!-- Product 5 -->
                 <div class="product-card fade-in">
-                    <div class="product-image">Niam Flip V2 Image</div>
+                    <div class="product-image">
+                        <img src="placeholder.png" alt="Niam Flip V2">
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">Niam Flip V2</h3>
                         <p class="product-description">The next generation of flip phones with enhanced features and improved durability. Style meets functionality.</p>
-                        <div class="product-price">$2</div>
-                        <button class="add-to-cart" data-product="Niam Flip V2" data-price="699">Add to Cart</button>
+                        <div class="product-price">$3</div>
+                        <div class="buddy-money">15 Buddy Money</div>
+                        <button class="add-to-cart" data-product="Niam Flip V2" data-price="3">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="placeholder.png" alt="Niam Phone Pro Max">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Niam Phone Pro Max</h3>
+                        <p class="product-description">Our premium flagship with the latest technology and superior performance. The ultimate phone experience.</p>
+                        <div class="product-price">$5</div>
+                        <div class="buddy-money">25 Buddy Money</div>
+                        <button class="add-to-cart" data-product="Niam Phone Pro Max" data-price="5">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -768,26 +932,32 @@ html {
                 <div class="team-grid">
                     <!-- Founder 1 -->
                     <div class="team-member fade-in">
-                        <div class="member-photo">Neev</div>
+                        <div class="member-photo">
+                            <img src="founders.png" alt="Neev Subbaiah">
+                        </div>
                         <h4 class="member-name">Neev Subbaiah</h4>
                         <div class="member-role">Co-Founder & Product Visionary</div>
-                        <p class="member-bio">With a background in technology innovation, Neev leads our product development with a focus on user experience and cutting-edge features.</p>
+                        <p class="member-bio">With a passion for innovation and user experience, Neev leads product development with a focus on creating devices that are both functional and aesthetically pleasing.</p>
                     </div>
                     
                     <!-- Founder 2 -->
                     <div class="team-member fade-in">
-                        <div class="member-photo">Landon</div>
+                        <div class="member-photo">
+                            <img src="founders.png" alt="Landon Waller">
+                        </div>
                         <h4 class="member-name">Landon Waller</h4>
                         <div class="member-role">CEO, Co-Founder, & Social Media Marketer</div>
-                        <p class="member-bio">Landon's expertise in mobile technology and software development ensures our products deliver exceptional performance and reliability.</p>
+                        <p class="member-bio">Landon drives the company's vision and strategy while managing our social media presence. His expertise in marketing helps connect Niam CO with our growing community.</p>
                     </div>
                     
                     <!-- Founder 3 -->
                     <div class="team-member fade-in">
-                        <div class="member-photo">Niam</div>
+                        <div class="member-photo">
+                            <img src="founders.png" alt="Niam Nangalia">
+                        </div>
                         <h4 class="member-name">Niam Nangalia</h4>
                         <div class="member-role">Editor & Business Strategist</div>
-                        <p class="member-bio">Niam oversees our operations and market strategy, ensuring Niam CO delivers value to customers while maintaining sustainable growth.</p>
+                        <p class="member-bio">Niam oversees content creation and business development, ensuring our brand messaging is consistent and our growth strategies are effectively implemented.</p>
                     </div>
                 </div>
             </div>
@@ -802,7 +972,6 @@ html {
         </div>
         
         <div class="cart-items" id="cartItems">
-            <!-- Cart items will be dynamically added here -->
             <p id="emptyCartMessage">Your cart is empty</p>
         </div>
         
@@ -813,34 +982,55 @@ html {
             Complete your order and pay in person when you receive your products.
         </div>
         
-        <form class="checkout-form" id="checkoutForm" action="https://formsubmit.co/niamnangalia1234@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="New Order from Niam CO">
-            <input type="hidden" name="_template" value="table">
+        <!-- UPDATED FORM WITH FORMSUBMIT -->
+        <form class="checkout-form" id="checkoutForm" 
+              action="https://formsubmit.co/niamcophones@outlook.com" 
+              method="POST">
             
+            <!-- FormSubmit Configuration -->
+            <input type="hidden" name="_subject" value="New Order from Niam CO Website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            
+            <!-- Customer Information -->
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="name">Full Name *</label>
                 <input type="text" id="name" name="name" required>
             </div>
             
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Email *</label>
                 <input type="email" id="email" name="email" required>
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
+                <label for="notes">Additional Notes (Optional)</label>
+                <textarea id="notes" name="notes" placeholder="Any special requests or changes to your order..."></textarea>
             </div>
             
-            <div class="form-group">
-                <label for="address">Notes</label>
-                <textarea id="address" name="address" required></textarea>
-            </div>
-            
+            <!-- Order Details (hidden field) -->
             <input type="hidden" name="order_details" id="orderDetails">
             
             <button type="submit" class="btn" style="width: 100%;">Place Order</button>
         </form>
+    </div>
+
+    <!-- Success Notification -->
+    <div class="notification-overlay" id="notificationOverlay"></div>
+    <div class="notification" id="successNotification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Order Placed Successfully!</h3>
+        <p>Thank you for your order. We will contact you shortly to arrange delivery and in-person payment.</p>
+        
+        <div class="contact-info">
+            <p><strong>Contact Information:</strong></p>
+            <p><i class="fas fa-phone"></i> Phone: 425-465-6990</p>
+            <p><i class="fas fa-envelope"></i> Email: niamcophones@outlook.com</p>
+        </div>
+        
+        <button class="close-notification" id="closeNotification">Continue Shopping</button>
     </div>
 
     <!-- Footer -->
@@ -851,9 +1041,9 @@ html {
                     <h3>Niam CO</h3>
                     <p>Revolutionizing the phone marketplace with unique products and customer-focused payment solutions.</p>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/landonwaller"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://youtube.com/channel/UC6-3o47fbPwzq6uMC6977iw/"><i class="fab fa-youtube"></i></a>
                         <a href="https://github.com/macvg2025"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/landonwaller"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
                 
@@ -870,15 +1060,15 @@ html {
                 <div class="footer-column">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 67 Drive, SE, Issaquah, WA</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 25025 SE 32nd St, Issaquah, WA 98029</li>
                         <li><i class="fas fa-phone"></i> 425-465-6990</li>
-                        <li><i class="fas fa-envelope"></i> niamnangalia1234@gmail.com</li>
+                        <li><i class="fas fa-envelope"></i> niamcophones@outlook.com</li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2023 Niam CO. All rights reserved.</p>
+                <p>&copy; 2025 Niam CO. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -895,6 +1085,9 @@ html {
         const checkoutForm = document.getElementById('checkoutForm');
         const orderDetails = document.getElementById('orderDetails');
         const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const successNotification = document.getElementById('successNotification');
+        const notificationOverlay = document.getElementById('notificationOverlay');
+        const closeNotification = document.getElementById('closeNotification');
         
         // Toggle cart modal
         cartIcon.addEventListener('click', () => {
@@ -962,7 +1155,9 @@ html {
                     const cartItem = document.createElement('div');
                     cartItem.className = 'cart-item';
                     cartItem.innerHTML = `
-                        <div class="cart-item-image">${item.product.substring(0, 1)}</div>
+                        <div class="cart-item-image">
+                            <img src="placeholder.png" alt="${item.product}">
+                        </div>
                         <div class="cart-item-details">
                             <div class="cart-item-title">${item.product}</div>
                             <div class="cart-item-price">$${item.price} x ${item.quantity}</div>
@@ -983,7 +1178,7 @@ html {
                     });
                 });
                 
-                cartTotal.textContent = `Total: $${total}`;
+                cartTotal.textContent = `Total: $${total} (${total * 5} Buddy Money)`;
             }
         }
         
@@ -992,29 +1187,44 @@ html {
             e.preventDefault();
             
             // Prepare order details
-            let orderText = 'Order Details:\n';
+            let orderText = 'ORDER DETAILS:\n\n';
             cart.forEach(item => {
-                orderText += `${item.product} - $${item.price} x ${item.quantity}\n`;
+                orderText += `Product: ${item.product}\n`;
+                orderText += `Price: $${item.price} (${item.price * 5} Buddy Money)\n`;
+                orderText += `Quantity: ${item.quantity}\n`;
+                orderText += `Subtotal: $${item.price * item.quantity} (${item.price * item.quantity * 5} Buddy Money)\n`;
+                orderText += '------------------------\n';
             });
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            orderText += `\nTotal: $${total}`;
+            orderText += `\nTOTAL: $${total} (${total * 5} Buddy Money)`;
             
+            // Set the order details in the hidden field
             orderDetails.value = orderText;
             
-            // Show success message
-            alert('Order placed successfully! You will receive a confirmation email shortly. Remember to complete your payment in person when you receive your products.');
+            // Show success notification
+            successNotification.classList.add('active');
+            notificationOverlay.classList.add('active');
             
-            // Reset cart
+            // Reset cart after form submission
             cart = [];
             updateCart();
             checkoutForm.reset();
-            
-            // Close modal
             cartModal.classList.remove('active');
             
             // In a real implementation, we would submit the form
             // checkoutForm.submit();
+        });
+        
+        // Close notification
+        closeNotification.addEventListener('click', () => {
+            successNotification.classList.remove('active');
+            notificationOverlay.classList.remove('active');
+        });
+        
+        notificationOverlay.addEventListener('click', () => {
+            successNotification.classList.remove('active');
+            notificationOverlay.classList.remove('active');
         });
         
         // Carousel functionality
