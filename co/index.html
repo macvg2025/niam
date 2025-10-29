@@ -1183,49 +1183,12 @@
         }
         
         // Form submission
-        checkoutForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Prepare order details
-            let orderText = 'ORDER DETAILS:\n\n';
-            cart.forEach(item => {
-                orderText += `Product: ${item.product}\n`;
-                orderText += `Price: $${item.price} (${item.price * 5} Buddy Money)\n`;
-                orderText += `Quantity: ${item.quantity}\n`;
-                orderText += `Subtotal: $${item.price * item.quantity} (${item.price * item.quantity * 5} Buddy Money)\n`;
-                orderText += '------------------------\n';
-            });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            orderText += `\nTOTAL: $${total} (${total * 5} Buddy Money)`;
-            
-            // Set the order details in the hidden field
-            orderDetails.value = orderText;
-            
-            // Show success notification
-            successNotification.classList.add('active');
-            notificationOverlay.classList.add('active');
-            
-            // Reset cart after form submission
-            cart = [];
-            updateCart();
-            checkoutForm.reset();
-            cartModal.classList.remove('active');
-            
-            // In a real implementation, we would submit the form
-            // checkoutForm.submit();
-        });
+       
         
         // Close notification
-        closeNotification.addEventListener('click', () => {
-            successNotification.classList.remove('active');
-            notificationOverlay.classList.remove('active');
-        });
         
-        notificationOverlay.addEventListener('click', () => {
-            successNotification.classList.remove('active');
-            notificationOverlay.classList.remove('active');
-        });
+        
+        
         
         // Carousel functionality
         const carouselInner = document.querySelector('.carousel-inner');
