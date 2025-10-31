@@ -556,89 +556,6 @@
             color: #92400e;
         }
         
-        /* Success Notification */
-        .notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            z-index: 1200;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .notification.active {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        
-        .notification-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1199;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease;
-        }
-        
-        .notification-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .notification-icon {
-            font-size: 3rem;
-            color: var(--success);
-            margin-bottom: 1rem;
-        }
-        
-        .notification h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .notification p {
-            margin-bottom: 1rem;
-            color: var(--gray);
-        }
-        
-        .contact-info {
-            background-color: #f1f5f9;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1.5rem 0;
-            text-align: left;
-        }
-        
-        .contact-info p {
-            margin-bottom: 0.5rem;
-        }
-        
-        .close-notification {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .close-notification:hover {
-            background-color: var(--primary-dark);
-        }
-        
         /* Footer */
         footer {
             background-color: var(--dark);
@@ -843,7 +760,7 @@
                         <p class="product-description">The revolutionary phone with organic design and premium features. Experience seamless performance with our signature aesthetic.</p>
                         <div class="product-price">$1</div>
                         <div class="buddy-money">4 Buddy Money</div>
-                        <button class="add-to-cart" data-product="iPork" data-price="3">Add to Cart</button>
+                        <button class="add-to-cart" data-product="iPork" data-price="1">Add to Cart</button>
                     </div>
                 </div>
                 
@@ -857,7 +774,7 @@
                         <p class="product-description">Unmatched durability meets sophisticated design. The iBrick is built to last with premium materials and exceptional performance.</p>
                         <div class="product-price">$2</div>
                         <div class="buddy-money">6 Buddy Money</div>
-                        <button class="add-to-cart" data-product="iBrick" data-price="4">Add to Cart</button>
+                        <button class="add-to-cart" data-product="iBrick" data-price="2">Add to Cart</button>
                     </div>
                 </div>
                 
@@ -871,7 +788,7 @@
                         <p class="product-description">Our flagship device with cutting-edge technology and elegant design. Experience the future of mobile communication.</p>
                         <div class="product-price">$1</div>
                         <div class="buddy-money">3 Buddy Money</div>
-                        <button class="add-to-cart" data-product="Niam Phone" data-price="3">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Niam Phone" data-price="1">Add to Cart</button>
                     </div>
                 </div>
                 
@@ -885,7 +802,7 @@
                         <p class="product-description">The classic flip phone reimagined with modern features. Compact design with powerful performance for everyday use.</p>
                         <div class="product-price">$1</div>
                         <div class="buddy-money">2 Buddy Money</div>
-                        <button class="add-to-cart" data-product="Niam Flip V1" data-price="2">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Niam Flip V1" data-price="1">Add to Cart</button>
                     </div>
                 </div>
                 
@@ -899,7 +816,7 @@
                         <p class="product-description">The next generation of flip phones with enhanced features and improved durability. Style meets functionality.</p>
                         <div class="product-price">$1</div>
                         <div class="buddy-money">3 Buddy Money</div>
-                        <button class="add-to-cart" data-product="Niam Flip V2" data-price="3">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Niam Flip V2" data-price="1">Add to Cart</button>
                     </div>
                 </div>
                 
@@ -913,7 +830,7 @@
                         <p class="product-description">Our premium flagship with the latest technology and superior performance. The ultimate phone experience.</p>
                         <div class="product-price">$2</div>
                         <div class="buddy-money">5 Buddy Money</div>
-                        <button class="add-to-cart" data-product="Niam Phone Pro Max" data-price="5">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Niam Phone Pro Max" data-price="2">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -984,13 +901,16 @@
         
         <!-- UPDATED FORM WITH FORMSUBMIT -->
         <form class="checkout-form" id="checkoutForm" 
-              action="https://formsubmit.co/niamcophones@outlook.com" 
+              action="https://formsubmit.co/niamnangalia1234@gmail.com" 
               method="POST">
             
             <!-- FormSubmit Configuration -->
             <input type="hidden" name="_subject" value="New Order from Niam CO Website">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
+            
+            <!-- Phone Order Details -->
+            <input type="hidden" name="phone_order" id="phoneOrderDetails">
             
             <!-- Customer Information -->
             <div class="form-group">
@@ -1004,8 +924,8 @@
             </div>
             
             <div class="form-group">
-                <label for="notes">Phone Type and Additional Notes</label>
-                <textarea id="notes" name="notes" placeholder="Special requests and phone type..."></textarea>
+                <label for="notes">Additional Notes (Optional)</label>
+                <textarea id="notes" name="notes" placeholder="Any special requests or changes to your order..."></textarea>
             </div>
             
             <!-- Order Details (hidden field) -->
@@ -1013,24 +933,6 @@
             
             <button type="submit" class="btn" style="width: 100%;">Place Order</button>
         </form>
-    </div>
-
-    <!-- Success Notification -->
-    <div class="notification-overlay" id="notificationOverlay"></div>
-    <div class="notification" id="successNotification">
-        <div class="notification-icon">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <h3>Order Placed Successfully!</h3>
-        <p>Thank you for your order. We will contact you shortly to arrange delivery and in-person payment.</p>
-        
-        <div class="contact-info">
-            <p><strong>Contact Information:</strong></p>
-            <p><i class="fas fa-phone"></i> Phone: 425-465-6990</p>
-            <p><i class="fas fa-envelope"></i> Email: niamcophones@outlook.com</p>
-        </div>
-        
-        <button class="close-notification" id="closeNotification">Continue Shopping</button>
     </div>
 
     <!-- Footer -->
@@ -1062,7 +964,7 @@
                     <ul class="footer-links">
                         <li><i class="fas fa-map-marker-alt"></i> 25025 SE 32nd St, Issaquah, WA 98029</li>
                         <li><i class="fas fa-phone"></i> 425-465-6990</li>
-                        <li><i class="fas fa-envelope"></i> niamcophones@outlook.com</li>
+                        <li><i class="fas fa-envelope"></i> niamnangalia1234@gmail.com</li>
                     </ul>
                 </div>
             </div>
@@ -1084,10 +986,8 @@
         const emptyCartMessage = document.getElementById('emptyCartMessage');
         const checkoutForm = document.getElementById('checkoutForm');
         const orderDetails = document.getElementById('orderDetails');
+        const phoneOrderDetails = document.getElementById('phoneOrderDetails');
         const addToCartButtons = document.querySelectorAll('.add-to-cart');
-        const successNotification = document.getElementById('successNotification');
-        const notificationOverlay = document.getElementById('notificationOverlay');
-        const closeNotification = document.getElementById('closeNotification');
         
         // Toggle cart modal
         cartIcon.addEventListener('click', () => {
@@ -1183,12 +1083,35 @@
         }
         
         // Form submission
-       
-        
-        // Close notification
-        
-        
-        
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Prepare order details
+            let orderText = 'ORDER DETAILS:\n\n';
+            cart.forEach(item => {
+                orderText += `Product: ${item.product}\n`;
+                orderText += `Price: $${item.price} (${item.price * 5} Buddy Money)\n`;
+                orderText += `Quantity: ${item.quantity}\n`;
+                orderText += `Subtotal: $${item.price * item.quantity} (${item.price * item.quantity * 5} Buddy Money)\n`;
+                orderText += '------------------------\n';
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            orderText += `\nTOTAL: $${total} (${total * 5} Buddy Money)`;
+            
+            // Set BOTH hidden fields
+            orderDetails.value = orderText;
+            phoneOrderDetails.value = orderText;
+            
+            // Reset cart after form submission
+            cart = [];
+            updateCart();
+            checkoutForm.reset();
+            cartModal.classList.remove('active');
+            
+            // Submit the form to FormSubmit
+            checkoutForm.submit();
+        });
         
         // Carousel functionality
         const carouselInner = document.querySelector('.carousel-inner');
